@@ -191,10 +191,14 @@ export function getBooleanInput(name: string, options?: InputOptions): boolean {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function setOutput(name: string, value: any): void {
   const filePath = process.env['GITHUB_OUTPUT'] || ''
+  // eslint-disable-next-line no-console
+  console.log(7777, 'GITHUB_OUTPUT', filePath)
+
   if (filePath) {
     return issueFileCommand('OUTPUT', prepareKeyValueMessage(name, value))
   }
-
+  // eslint-disable-next-line no-console
+  console.log(8888, 'NO FILEPATH')
   process.stdout.write(os.EOL)
   issueCommand('set-output', {name}, toCommandValue(value))
 }
@@ -351,9 +355,14 @@ export async function group<T>(name: string, fn: () => Promise<T>): Promise<T> {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function saveState(name: string, value: any): void {
   const filePath = process.env['GITHUB_STATE'] || ''
+  // eslint-disable-next-line no-console
+  console.log(7777, 'GITHUB_OUTPUT', filePath)
   if (filePath) {
     return issueFileCommand('STATE', prepareKeyValueMessage(name, value))
   }
+
+  // eslint-disable-next-line no-console
+  console.log(8888, 'NO FILEPATH')
 
   issueCommand('save-state', {name}, toCommandValue(value))
 }
